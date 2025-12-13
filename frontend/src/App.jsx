@@ -11,7 +11,6 @@ function App() {
       setAccessToken(access);
 
       localStorage.setItem("spotify_access", access);
-
       localStorage.setItem("spotify_refresh", refresh);
 
       window.history.replaceState({}, document.title, "/");

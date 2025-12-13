@@ -38,6 +38,7 @@ export const callback = async (req, res) => {
       {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
       }
+      
     );
 
     const { access_token, refresh_token } = response.data;
