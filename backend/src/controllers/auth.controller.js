@@ -4,6 +4,7 @@ import axios from "axios";
 dotenv.config();
 
 export const login = (req, res) => {
+  console.log("🔥 /auth/login HIT");
   const scope = [
     "user-read-private",
     "playlist-modify-public",
@@ -44,7 +45,7 @@ export const callback = async (req, res) => {
     const { access_token, refresh_token } = response.data;
 
     // Redirect to frontend with tokens
-    const redirectUrl = `${process.env.FRONTEND_URL}/?access=${access_token}&refresh=${refresh_token}`;
+    const redirectUrl = `${process.env.FRONTEND_URL}/callback?access=${access_token}&refresh=${refresh_token}`;
 
     res.redirect(redirectUrl);
   } catch (error) {

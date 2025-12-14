@@ -1,57 +1,17 @@
-import { useState, useEffect } from "react";
-function App() {
+// src/App.jsx
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import SpotifyCallback from "./pages/SpotifyCallback";
+import Dashboard from "./pages/Dashboard";
 
-  const [accessToken, setAccessToken] = useState(null);
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const access = params.get("access");
-    const refresh = params.get("refresh");
-
-    if (access) {
-      setAccessToken(access);
-
-      localStorage.setItem("spotify_access", access);
-      localStorage.setItem("spotify_refresh", refresh);
-
-      window.history.replaceState({}, document.title, "/");
-    }
-  }, []);
-
-  const loginSpotify = () => {
-    window.location.href = "http://127.0.0.1:4000/auth/login";
-  };
-  
+export default function App() {
   return (
-    <div style={{ padding: "20px", fontSize: "24px",color: "purple" }}>
-      {accessToken ? (
-        <>
-          <h2>Logged in Successfully 💜</h2>
-          <p>Your Spotify token is active.</p>
-        </>
-      ) : (
-        <>
-          <h1>BTS ARMY Playlist Generator 💜</h1>
-          <button
-            onClick={loginSpotify}
-           style={{
-              padding: "12px 20px",
-              background: "#8B5CF6",
-              color: "white",
-              borderRadius: "8px",
-              border: "none",
-              fontSize: "18px",
-              cursor: "pointer",
-            }}
-          >
-            Login with Spotify
-          </button>
-        </>
-      )}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/callback" element={<SpotifyCallback />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-
-
-
-export default App;
