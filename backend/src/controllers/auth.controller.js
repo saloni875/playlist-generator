@@ -4,9 +4,10 @@ import axios from "axios";
 dotenv.config();
 
 export const login = (req, res) => {
-  console.log("🔥 /auth/login HIT");
+  console.log(" /auth/login HIT");
   const scope = [
     "user-read-private",
+    "user-read-email",
     "playlist-modify-public",
     "playlist-modify-private",
   ].join(" ");
@@ -18,6 +19,7 @@ export const login = (req, res) => {
       client_id: process.env.SPOTIFY_CLIENT_ID,
       scope: scope,
       redirect_uri: process.env.SPOTIFY_REDIRECT_URI,
+      show_dialog: "true",
     });
 
   res.redirect(authURL);
